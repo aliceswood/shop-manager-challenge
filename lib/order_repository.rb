@@ -25,22 +25,22 @@ class OrderRepository
     return record_to_order_object(record)
   end
 
-  # Creates a single record
-  # Takes an Order object as an argument
   def create(order)
-    # Executes the SQL query:
-    # INSERT INTO orders (customer_name, order_date, item_id) VALUES($1, $2, $3)
+    sql = 'INSERT INTO orders (customer_name, order_date, item_id) VALUES($1, $2, $3);'
+    sql_params = [order.customer_name, order.order_date, order.item_id]
 
-    # returns nil (just creates a new order)
+    DatabaseConnection.exec_params(sql, sql_params)
+    
+    return nil
   end
 
-  # Updates a record
-  # Takes an id as the argument
-  def update(id)
-    # Executes the SQL query:
-    # UPDATE orders SET customer_name, order_date, item_id WHERE id = $1;
+  def update(order)
+    sql = 'UPDATE orders SET customer_name = $1, order_date = $2, item_id = $3 WHERE id = $4;'
+    sql_params = [order.customer_name, order.order_date, order.item_id, order.id]
 
-    # returns nil (only updates the record)
+    DatabaseConnection.exec_params(sql, sql_params)
+    
+    return nil
   end
 
   # Creates a single record

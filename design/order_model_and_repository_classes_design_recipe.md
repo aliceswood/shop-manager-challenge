@@ -135,10 +135,10 @@ class OrderRepository
   end
 
   # Updates a record
-  # Takes an id as the argument
-  def update(id)
+  # Takes an order object as the argument
+  def update(order)
     # Executes the SQL query:
-    # UPDATE orders SET customer_name, order_date WHERE id = $1;
+    # UPDATE orders SET customer_name = $1, order_date = $2, item_id = $3 WHERE id = $4;
 
     # returns nil (only updates the record)
   end

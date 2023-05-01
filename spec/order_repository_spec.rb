@@ -44,7 +44,7 @@ RSpec.describe OrderRepository do
     expect(order.order_date).to eq('2023-05-01')
   end
     
-  xit 'creates a new order' do
+  it 'creates a new order' do
     repo = OrderRepository.new
 
     order = Order.new
@@ -57,29 +57,29 @@ RSpec.describe OrderRepository do
     all_orders = repo.all
     latest_order = all_orders.last
 
-    expect(latest_order.id).to eq('3')
+    expect(latest_order.id).to eq(3)
     expect(latest_order.customer_name).to eq('Lucy')
     expect(latest_order.order_date).to eq('2023-06-01')
-    expect(latest_order.item_id).to eq('2')
+    expect(latest_order.item_id).to eq(2)
   end
    
-  xit 'updates all information for an order' do
+  it 'updates all information for an order' do
     repo = OrderRepository.new
     order = repo.find(1)
 
     order.customer_name = 'Emily'
     order.order_date = '2023-06-01'
-    order.item_id = '2'
+    order.item_id = 2
 
     repo.update(order)
     updated_order = repo.find(1)
 
     expect(updated_order.customer_name).to eq('Emily')
     expect(updated_order.order_date).to eq('2023-06-01')
-    expect(updated_order.item_id).to eq('2')
+    expect(updated_order.item_id).to eq(2)
   end
     
-  xit 'updates some of the information for an order' do
+  it 'updates some of the information for an order' do
     repo = OrderRepository.new
 
     order = repo.find(1)
@@ -91,7 +91,7 @@ RSpec.describe OrderRepository do
 
     expect(updated_order.customer_name).to eq('Emily')
     expect(updated_order.order_date).to eq('2023-04-01')
-    expect(updated_order.item_id).to eq('1')
+    expect(updated_order.item_id).to eq(1)
   end
     
   xit 'deletes the order with id 1' do
