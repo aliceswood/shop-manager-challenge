@@ -6,16 +6,9 @@ class ItemRepository
     items = []
 
     result_set = DatabaseConnection.exec_params(sql, [])
-    item = Item.new
-
-    result_set.each do |record|
-      item.id = record['id']
-      item.name = record['name']
-      item.unit_price = record['unit_price']
-      item.quantity = record['quantity']
     
-
-      items << item
+    result_set.each do |record|
+      items << record_to_item_object(record)
     end
     return items
   end
@@ -54,5 +47,16 @@ class ItemRepository
     # DELETE FROM items WHERE id = $1;
 
     # returns nil (only deletes the record)
+  end
+
+  private 
+
+  def record_to_item_object(record)
+    item = Item.new
+    item.id = record['id'].to_i
+    item.name = record['name']
+    item.unit_price = record['unit_price'].to_i
+    item.quantity = record['quantity'].to_i
+    return item
   end
 end

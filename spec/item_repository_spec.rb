@@ -12,16 +12,16 @@ RSpec.describe ItemRepository do
     reset_items_table
   end
 
-  xit 'gets a list of all items' do
+  it 'gets a list of all items' do
     repo = ItemRepository.new
 
     items = repo.all
 
     expect(items.length).to eq(2)
-    expect(items.first.id).to eq('1')
+    expect(items.first.id).to eq(1)
     expect(items.first.name).to eq('Super Shark Vacuum Cleaner')
-    expect(items.first.unit_price).to eq('99')
-    expect(items.first.quantity).to eq('30')
+    expect(items.first.unit_price).to eq(99)
+    expect(items.first.quantity).to eq(30)
   end
   
   xit 'returns the item at id 1' do
