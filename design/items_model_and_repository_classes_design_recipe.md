@@ -166,7 +166,7 @@ These examples will later be encoded as RSpec tests.
 
 # 1
 # Get all items
-repo = ItemsRepository.new
+repo = ItemRepository.new
 
 items = repo.all
 
@@ -180,7 +180,7 @@ items.first.quantity # => 30
 # 2
 # Get a single order at id 1
 
-repo = OrderRepository.new
+repo = ItemRepository.new
 
 order = repo.find(1)
 
@@ -192,7 +192,7 @@ items.quantity # => 30
 # 2
 # Get a single order at id 2
 
-repo = OrderRepository.new
+repo = ItemRepository.new
 
 order = repo.find(1)
 
