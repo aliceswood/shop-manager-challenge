@@ -80,8 +80,7 @@ RSpec.describe ItemRepository do
     expect(updated_item.unit_price).to eq(79)
     expect(updated_item.quantity).to eq(60)
   end
-    # 5 
-    # Updates some information in an item
+
   it 'updates some of the information for an item' do
     repo = ItemRepository.new
     item = repo.find(1)
@@ -96,7 +95,7 @@ RSpec.describe ItemRepository do
     expect(updated_item.quantity).to eq(30)
   end
    
-  xit 'deletes the item with id 1' do
+  it 'deletes the item with id 1' do
     repo = ItemRepository.new
 
     id_to_delete = 1
@@ -105,13 +104,13 @@ RSpec.describe ItemRepository do
     all_items = repo.all
 
     expect(all_items.length).to eq(1)
-    expect(all_items.first.id).to eq('2')
+    expect(all_items.first.id).to eq(2)
     expect(all_items.first.name).to eq('Makerspresso Coffee Machine')
-    expect(all_items.first.unit_price).to eq('69')
-    expect(all_items.first.quantity).to eq('15')
+    expect(all_items.first.unit_price).to eq(69)
+    expect(all_items.first.quantity).to eq(15)
   end
 
-  xit 'deletes both records' do
+  it 'deletes both records' do
     repo = ItemRepository.new
 
     repo.delete(1)

@@ -40,13 +40,12 @@ class ItemRepository
     return nil
   end
 
-  # Creates a single record
-  # Takes an Item object as an argument
-  def delete(item)
-    # Executes the SQL query:
-    # DELETE FROM items WHERE id = $1;
+  def delete(id)
+    sql = 'DELETE FROM items WHERE id = $1;'
+    sql_params = [id]
+    DatabaseConnection.exec_params(sql, sql_params)
 
-    # returns nil (only deletes the record)
+    return nil
   end
 
   private 
