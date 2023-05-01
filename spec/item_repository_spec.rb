@@ -24,26 +24,26 @@ RSpec.describe ItemRepository do
     expect(items.first.quantity).to eq(30)
   end
   
-  xit 'returns the item at id 1' do
+  it 'returns the item at id 1' do
     repo = ItemRepository.new
 
-    order = repo.find(1)
+    item = repo.find(1)
 
-    expect(items.id).to eq('1')
-    expect(items.name).to eq('Super Shark Vacuum Cleaner')
-    expect(items.unit_price).to eq('99')
-    expect(items.quantity).to eq('30')
+    expect(item.id).to eq(1)
+    expect(item.name).to eq('Super Shark Vacuum Cleaner')
+    expect(item.unit_price).to eq(99)
+    expect(item.quantity).to eq(30)
   end
 
-  xit 'returns the item at id 2' do
+  it 'returns the item at id 2' do
     repo = ItemRepository.new
 
-    order = repo.find(1)
+    item = repo.find(2)
 
-    expect(items.id).to eq('2')
-    expect(items.name).to eq('Makerspresso Coffee Machine')
-    expect(items.unit_price).to eq('69')
-    expect(items.quantity).to eq('15')
+    expect(item.id).to eq(2)
+    expect(item.name).to eq('Makerspresso Coffee Machine')
+    expect(item.unit_price).to eq(69)
+    expect(item.quantity).to eq(15)
   end
     
   xit 'creates a new item' do

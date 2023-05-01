@@ -182,24 +182,24 @@ items.first.quantity # => 30
 
 repo = ItemRepository.new
 
-order = repo.find(1)
+item = repo.find(1)
 
-items.id # => 1
-items.name # => 'Super Shark Vacuum Cleaner'
-items.unit_price # => 99
-items.quantity # => 30
+item.id # => 1
+item.name # => 'Super Shark Vacuum Cleaner'
+item.unit_price # => 99
+item.quantity # => 30
 
 # 2
 # Get a single order at id 2
 
 repo = ItemRepository.new
 
-order = repo.find(1)
+item = repo.find(2)
 
-items.id # => 2
-items.name # => 'Makerspresso Coffee Machine'
-items.unit_price # => 69
-items.quantity # => 15
+item.id # => 2
+item.name # => 'Makerspresso Coffee Machine'
+item.unit_price # => 69
+item.quantity # => 15
 
 # 3
 # Create a new item
