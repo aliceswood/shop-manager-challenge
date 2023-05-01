@@ -13,8 +13,6 @@ class ItemRepository
     return items
   end
 
-  # Gets a single record by its ID
-  # One argument: the id (number)
   def find(id)
     sql = 'SELECT id, name, unit_price, quantity FROM items WHERE id = $1;'
     sql_params = [id]
@@ -26,8 +24,6 @@ class ItemRepository
     return record_to_item_object(record)
   end
 
-  # Creates a single record
-  # Takes an Item object as an argument
   def create(item)
     sql = 'INSERT INTO items (name, unit_price, quantity) VALUES($1, $2, $3);'
     sql_params = [item.name, item.unit_price, item.quantity]
@@ -36,13 +32,12 @@ class ItemRepository
     return nil
   end
 
-  # Updates a record
-  # Takes an id as the argument
-  def update(id)
-    # Executes the SQL query:
-    # UPDATE items SET name, unit_price, quantity WHERE id = $1;
+  def update(item)
+    sql = 'UPDATE items SET name = $1, unit_price = $2, quantity = $3 WHERE id = $4;'
+    sql_params = [item.name, item.unit_price, item.quantity, item.id]
+    DatabaseConnection.exec_params(sql, sql_params)
 
-    # returns nil (only updates the record)
+    return nil
   end
 
   # Creates a single record

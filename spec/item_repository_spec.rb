@@ -65,7 +65,7 @@ RSpec.describe ItemRepository do
     expect(latest_item.quantity).to eq(45)
   end
 
-  xit 'updates all of the information for an item' do
+  it 'updates all of the information for an item' do
     repo = ItemRepository.new
     item = repo.find(1)
 
@@ -77,12 +77,12 @@ RSpec.describe ItemRepository do
     updated_item = repo.find(1)
 
     expect(updated_item.name).to eq('Comfy Armchair')
-    expect(updated_item.unit_price).to eq('79')
-    expect(updated_item.quantity).to eq('60')
+    expect(updated_item.unit_price).to eq(79)
+    expect(updated_item.quantity).to eq(60)
   end
     # 5 
     # Updates some information in an item
-  xit 'updates some of the information for an item' do
+  it 'updates some of the information for an item' do
     repo = ItemRepository.new
     item = repo.find(1)
 
@@ -92,8 +92,8 @@ RSpec.describe ItemRepository do
     updated_item = repo.find(1)
 
     expect(updated_item.name).to eq('Comfy Armchair')
-    expect(updated_item.unit_price).to eq('99')
-    expect(updated_item.quantity).to eq('30')
+    expect(updated_item.unit_price).to eq(99)
+    expect(updated_item.quantity).to eq(30)
   end
    
   xit 'deletes the item with id 1' do

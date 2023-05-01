@@ -137,16 +137,16 @@ class ItemRepository
 
   # Updates a record
   # Takes an id as the argument
-  def update(id)
+  def update(item)
     # Executes the SQL query:
-    # UPDATE items SET name, unit_price, quantity, order_id WHERE id = $1;
+    # UPDATE items SET name = $1, unit_price = $2, quantity = $3 WHERE id = $4;
 
     # returns nil (only updates the record)
   end
 
   # Creates a single record
   # Takes an Item object as an argument
-  def delete(item)
+  def delete(id)
     # Executes the SQL query:
     # DELETE FROM items WHERE id = $1;
 
