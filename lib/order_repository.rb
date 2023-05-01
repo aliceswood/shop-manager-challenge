@@ -43,13 +43,13 @@ class OrderRepository
     return nil
   end
 
-  # Creates a single record
-  # Takes an Order object as an argument
-  def delete(order)
-    # Executes the SQL query:
-    # DELETE FROM orders WHERE id = $1;
+  def delete(id)
+    sql = 'DELETE FROM orders WHERE id = $1;'
+    sql_params = [id]
 
-    # returns nil (only deletes the record)
+    DatabaseConnection.exec_params(sql, sql_params)
+    
+    return nil
   end
 
   private

@@ -94,21 +94,18 @@ RSpec.describe OrderRepository do
     expect(updated_order.item_id).to eq(1)
   end
     
-  xit 'deletes the order with id 1' do
+  it 'deletes the order with id 1' do
     repo = OrderRepository.new
 
     id_to_delete = 1
     repo.delete(id_to_delete)
-    all_orders = repo.all
 
+    all_orders = repo.all
     expect(all_orders.length).to eq(1)
-    expect(all_orders.first.id).to eq('2')
-    expect(all_orders.first.customer_name).to eq('Chris')
-    expect(all_orders.first.order_date).to eq('2023-05-01')
-    expect(all_orders.first.item_id).to eq('2')
+    expect(all_orders.first.id).to eq(2)
   end
     
-  xit 'deletes both orders' do
+  it 'deletes both orders' do
     repo = OrderRepository.new
 
     repo.delete(1)

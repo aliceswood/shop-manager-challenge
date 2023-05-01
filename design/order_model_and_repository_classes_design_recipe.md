@@ -145,7 +145,7 @@ class OrderRepository
 
   # Creates a single record
   # Takes an Order object as an argument
-  def delete(order)
+  def delete(id)
     # Executes the SQL query:
     # DELETE FROM orders WHERE id = $1;
 
