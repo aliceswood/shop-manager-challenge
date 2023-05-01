@@ -46,7 +46,7 @@ RSpec.describe ItemRepository do
     expect(item.quantity).to eq(15)
   end
     
-  xit 'creates a new item' do
+  it 'creates a new item' do
     repo = ItemRepository.new
 
     item = Item.new
@@ -59,10 +59,10 @@ RSpec.describe ItemRepository do
     all_items = repo.all
     latest_item = all_items.last
 
-    expect(latest_item.id).to eq('3')
+    expect(latest_item.id).to eq(3)
     expect(latest_item.name).to eq('Big TV')
-    expect(latest_item.unit_price).to eq('129')
-    expect(latest_item.quantity).to eq('45')
+    expect(latest_item.unit_price).to eq(129)
+    expect(latest_item.quantity).to eq(45)
   end
 
   xit 'updates all of the information for an item' do
