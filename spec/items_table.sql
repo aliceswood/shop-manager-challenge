@@ -1,6 +1,7 @@
 -- Create the table without the foreign key first.
 CREATE TABLE items (
   id SERIAL PRIMARY KEY,
+  name text,
   unit_price int,
   quantity int
 );
@@ -8,7 +9,6 @@ CREATE TABLE items (
 -- Then the table with the foreign key first.
 CREATE TABLE orders (
   id SERIAL PRIMARY KEY,
-  name text,
   customer_name text,
   order_date date,
 -- The foreign key name is always {other_table_singular}_id

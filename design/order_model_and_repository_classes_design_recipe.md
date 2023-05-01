@@ -46,8 +46,8 @@ INSERT INTO orders (customer_name, order_date, item_id) VALUES ('Chris', '1 May 
 Run this SQL file on the database to truncate (empty) the table, and insert the seed data. Be mindful of the fact any existing records in the table will be deleted.
 
 ```bash
-psql -h 127.0.0.1 shop_manager < seeds_shop_manager.sql]
-psql -h 127.0.0.1 shop_manager_test < seeds_shop_manager.sql
+psql -h 127.0.0.1 shop_manager < spec/seeds_shop_manager.sql
+psql -h 127.0.0.1 shop_manager_test < spec/seeds_shop_manager.sql
 ```
 
 ## 3. Define the class names

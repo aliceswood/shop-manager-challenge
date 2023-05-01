@@ -1,12 +1,11 @@
-# Two Tables (Many-to-Many) Design Recipe Template
+# Two Tables Design Recipe Template
 
-_Copy this recipe template to design and create two related database tables having a Many-to-Many relationship._
+_Copy this recipe template to design and create two related database tables from a specification._
 
 ## 1. Extract nouns from the user stories or specification
 
 ```
-# EXAMPLE USER STORIES:
-
+# USER STORY:
 As a shop manager
 So I can know which items I have in stock
 I want to keep a list of my shop items with their name and unit price.
@@ -39,17 +38,18 @@ I want to be able to create a new order.
 ```
 Nouns:
 
-items, name, unit price, quantity, orders, customer name, order date
+items, name, unit price, quantity, orders, customer name, item id, order date
 ```
 
 ## 2. Infer the Table Name and Columns
 
 Put the different nouns in this table. Replace the example with your own nouns.
 
-| Record                | Properties          |
-| --------------------- | ------------------  |
-| items                 | name, unit_price, quantity
-| orders                | customer_name, order_date
+| Record            | Properties          |
+| ----------------- | ------------------  |
+| items             | name, unit_price, quantity
+| orders            | customer_name, order_date, item_id
+
 
 1. Name of the first table (always plural): `items` 
 
@@ -57,7 +57,7 @@ Put the different nouns in this table. Replace the example with your own nouns.
 
 2. Name of the second table (always plural): `orders` 
 
-    Column names: `customer_name`, `order_date`
+    Column names: `customer_name`, `order_date`, `item_id`
 
 ## 3. Decide the column types.
 
@@ -80,47 +80,37 @@ Table: orders
 id: SERIAL
 customer_name: text
 order_date: date
+item_id: int
 ```
 
-## 4. Design the Many-to-Many relationship
+## 4. Decide on The Tables Relationship
 
-Make sure you can answer YES to these two questions:
+Most of the time, you'll be using a **one-to-many** relationship, and will need a **foreign key** on one of the two tables.
+
+To decide on which one, answer these two questions:
 
 1. Can one [item] have many [orders]? (Yes)
-2. Can one [order] have many [items]? (Yes)
+2. Can one [order] have many [items]? (Not for MVP)
 
-```
-# EXAMPLE
+-> Therefore,
+-> An item HAS MANY orders
+-> An order BELONGS TO an item
 
-1. Can one item have many orders? YES
-2. Can one order have many items? YES
-```
+-> Therefore, the foreign key is on the orders table.
 
-_If you would answer "No" to one of these questions, you'll probably have to implement a One-to-Many relationship, which is simpler. Use the relevant design recipe in that case._
 
-## 5. Design the Join Table
-
-The join table usually contains two columns, which are two foreign keys, each one linking to a record in the two other tables.
-
-The naming convention is `items_orders`.
-
-```
-# EXAMPLE
-
-Join table for tables: items and orders
-Join table name: items_orders
-Columns: item_id, order_id
-```
+*If you can answer YES to the two questions, you'll probably have to implement a Many-to-Many relationship, which is more complex and needs a third table (called a join table).*
 
 ## 4. Write the SQL.
 
 ```sql
+
 -- EXAMPLE
--- file: items_orders.sql
+-- file: item_table.sql
 
 -- Replace the table name, columm names and types.
 
--- Create the first table.
+-- Create the table without the foreign key first.
 CREATE TABLE items (
   id SERIAL PRIMARY KEY,
   name text,
@@ -128,20 +118,16 @@ CREATE TABLE items (
   quantity int
 );
 
--- Create the second table.
+-- Then the table with the foreign key first.
 CREATE TABLE orders (
   id SERIAL PRIMARY KEY,
   customer_name text,
-  order_date date
-);
-
--- Create the join table.
-CREATE TABLE items_orders (
+  order_date date,
+-- The foreign key name is always {other_table_singular}_id
   item_id int,
-  order_id int,
-  constraint fk_item foreign key(item_id) references items(id) on delete cascade,
-  constraint fk_order foreign key(order_id) references orders(id) on delete cascade,
-  PRIMARY KEY (item_id, order_id)
+  constraint fk_item foreign key(item_id)
+    references items(id)
+    on delete cascade
 );
 
 ```
@@ -149,5 +135,8 @@ CREATE TABLE items_orders (
 ## 5. Create the tables.
 
 ```bash
-psql -h 127.0.0.1 shop_manager < spec/items_orders.sql
+createdb shop_manager
+createdb shop_manager_test
+psql -h 127.0.0.1 shop_manager < spec/items_table.sql
+psql -h 127.0.0.1 shop_manager_test < spec/items_table.sql
 ```
